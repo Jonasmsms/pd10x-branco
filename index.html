@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Método PD10X — Tráfego Pago para Delivery</title>
+<meta name="description" content="O sistema completo de tráfego pago para o nicho de alimentação. Do zero à escala.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+
+/* TOKENS */
+:root{
+  --orange:#FF5500;
+  --orange-light:#fff3ee;
+  --black:#111;
+  --gray:#666;
+  --gray-light:#f5f5f5;
+  --border:#e5e5e5;
+  --w:720px;
+}
+
+/* LAYOUT */
+.w{max-width:var(--w);margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+
+/* BARRA TOPO */
+.topbar{background:var(--orange);color:#fff;text-align:center;padding:10px 20px;font-size:13px;font-weight:600;letter-spacing:.3px}
+.topbar span{opacity:.8}
+
+/* HERO */
+.hero{padding:64px 0 56px;border-bottom:1px solid var(--border)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--orange-light);border:1px solid rgba(255,85,0,.2);color:var(--orange);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:28px}
+.hero-eyebrow span{width:6px;height:6px;background:var(--orange);border-radius:50%;display:inline-block}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:800;line-height:1.05;letter-spacing:-1px;margin-bottom:20px;color:var(--black)}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--gray);max-width:560px;margin-bottom:36px;line-height:1.6}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-size:16px;font-weight:700;padding:16px 28px;border-radius:8px;transition:opacity .15s;letter-spacing:.2px}
+.btn-primary:hover{opacity:.88}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid var(--border);color:var(--gray);font-size:15px;font-weight:600;padding:15px 24px;border-radius:8px;transition:border-color .15s}
+.btn-ghost:hover{border-color:#999}
+.hero-proof{display:flex;gap:32px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--border)}
+.proof-item{display:flex;flex-direction:column;gap:2px}
+.proof-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--black)}
+.proof-label{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+
+/* VSL */
+.vsl-section{background:var(--gray-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.vsl-label{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:2px;font-weight:600;text-align:center;margin-bottom:20px}
+.vsl-wrap{position:relative;padding-bottom:56.25%;background:#000;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid var(--border)}
+.vsl-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.vsl-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.vsl-wrap:hover .vsl-play{transform:translate(-50%,-50%) scale(1.08)}
+.vsl-play svg{width:26px;height:26px;fill:#fff;margin-left:4px}
+.vsl-iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vsl-cta{text-align:center;margin-top:24px}
+
+/* DOR */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.pain-card{background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px}
+.pain-icon{font-size:24px}
+.pain-title{font-size:15px;font-weight:700;color:var(--black)}
+.pain-desc{font-size:13px;color:var(--gray);line-height:1.5}
+
+/* QUALIFICAÇÃO */
+.qual-section{background:var(--gray-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.qual-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:560px){.qual-grid{grid-template-columns:1fr}}
+.qual-box{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px}
+.qual-head{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.qual-box.yes .qual-head{color:#16a34a}
+.qual-box.no .qual-head{color:#dc2626}
+.qual-item{font-size:14px;color:var(--gray);padding:7px 0;display:flex;gap:10px;border-bottom:1px solid #f5f5f5}
+.qual-item:last-child{border:none}
+
+/* MÓDULOS */
+.mod-meta{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.mod-meta-item{font-size:13px;color:var(--gray)}
+.mod-meta-item strong{color:var(--black)}
+.mod-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.mod-item{border-bottom:1px solid var(--border)}
+.mod-item:last-child{border:none}
+.mod-header{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;background:#fff;transition:background .15s}
+.mod-header:hover{background:var(--gray-light)}
+.mod-num{font-size:10px;font-weight:700;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase;background:var(--orange-light);padding:3px 8px;border-radius:4px;flex-shrink:0}
+.mod-title{font-size:14px;font-weight:600;flex:1;color:var(--black)}
+.mod-badge{font-size:11px;color:var(--gray);background:var(--gray-light);padding:2px 8px;border-radius:100px;flex-shrink:0}
+.mod-chevron{color:#ccc;transition:transform .2s;flex-shrink:0}
+.mod-item.open .mod-chevron{transform:rotate(180deg)}
+.mod-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border);background:#fafafa}
+.mod-item.open .mod-body{display:block}
+.mod-body ul{list-style:none;padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.mod-body li{font-size:13px;color:var(--gray);display:flex;gap:10px;align-items:flex-start}
+.mod-body li::before{content:'→';color:var(--orange);flex-shrink:0;font-weight:700}
+
+/* INSTRUTOR */
+.inst-section{background:var(--gray-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.inst-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:40px;display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+@media(max-width:600px){.inst-card{grid-template-columns:1fr}}
+.inst-photo{border-radius:8px;overflow:hidden;aspect-ratio:3/4;object-fit:cover;object-position:top center;width:100%}
+.inst-name{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:4px}
+.inst-role{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:16px}
+.inst-bio{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px}
+.inst-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:20px;border-top:1px solid var(--border)}
+.inst-stat-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--black)}
+.inst-stat-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+
+/* DEPOIMENTOS */
+.test-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.test-card{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff}
+.test-thumb{position:relative;padding-bottom:56.25%;background:#111;cursor:pointer}
+.test-thumb img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+.test-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.test-play svg{width:18px;height:18px;fill:#fff;margin-left:3px}
+.test-info{padding:16px}
+.test-stars{color:var(--orange);font-size:13px;margin-bottom:4px}
+.test-name{font-size:14px;font-weight:700;color:var(--black)}
+.test-role{font-size:12px;color:var(--gray)}
+
+/* BÔNUS */
+.bonus-section{background:var(--gray-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.bonus-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px}
+.bonus-tag{font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.bonus-title{font-size:14px;font-weight:700;color:var(--black);margin-bottom:8px}
+.bonus-desc{font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:12px}
+.bonus-price{font-size:12px}
+.bonus-price s{color:#ccc}
+.bonus-price strong{color:#16a34a;margin-left:6px}
+
+/* PREÇO */
+.price-section{border-top:1px solid var(--border)}
+.price-card{border:1px solid var(--border);border-radius:8px;padding:40px;max-width:520px;margin:0 auto;background:#fff}
+.price-badge{display:inline-block;background:var(--orange-light);border:1px solid rgba(255,85,0,.2);color:var(--orange);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:24px}
+.price-from{font-size:14px;color:#ccc;text-decoration:line-through;margin-bottom:4px}
+.price-tag{font-family:'Syne',sans-serif;font-size:clamp(48px,8vw,72px);font-weight:800;color:var(--orange);line-height:1;margin-bottom:4px}
+.price-install{font-size:14px;color:var(--gray);margin-bottom:28px}
+.vagas-wrap{margin:20px 0 28px}
+.vagas-label{display:flex;justify-content:space-between;font-size:12px;color:var(--gray);margin-bottom:8px}
+.vagas-bar{background:#f0f0f0;border-radius:100px;height:6px;overflow:hidden}
+.vagas-fill{background:var(--orange);width:55%;height:100%;border-radius:100px}
+.price-list{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0;margin-bottom:24px;list-style:none;display:flex;flex-direction:column;gap:10px}
+.price-list li{font-size:13px;color:var(--gray);display:flex;gap:10px;align-items:flex-start}
+.price-list li::before{content:'✓';color:#16a34a;font-weight:700;flex-shrink:0}
+.price-total{font-size:12px;color:var(--gray);text-align:center;margin-bottom:20px}
+.btn-buy{display:block;background:var(--orange);color:#fff;font-size:18px;font-weight:700;padding:20px;border-radius:8px;text-align:center;margin-bottom:12px;transition:opacity .15s;letter-spacing:.3px}
+.btn-buy:hover{opacity:.88}
+.price-trust{font-size:12px;color:#999;text-align:center}
+
+/* GARANTIA */
+.guarantee{border:1.5px solid #16a34a;border-radius:8px;padding:32px;max-width:520px;margin:32px auto 0;text-align:center;background:#f0fdf4}
+.guarantee-icon{font-size:36px;margin-bottom:12px}
+.guarantee h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--black)}
+.guarantee p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* FAQ */
+.faq-section{background:var(--gray-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.faq-list{max-width:640px;margin:0 auto;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:last-child{border:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;cursor:pointer;font-size:14px;font-weight:600;color:var(--black);gap:12px;transition:background .15s}
+.faq-q:hover{background:var(--gray-light)}
+.faq-chevron{color:#ccc;transition:transform .2s;flex-shrink:0}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 20px 18px;font-size:13px;color:var(--gray);line-height:1.7;border-top:1px solid var(--border);background:#fafafa}
+.faq-item.open .faq-a{display:block}
+
+/* CTA FINAL */
+.final-cta{text-align:center;padding:80px 0;border-top:1px solid var(--border)}
+.final-cta h2{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,44px);font-weight:800;margin-bottom:16px;letter-spacing:-0.5px}
+.final-cta h2 em{font-style:normal;color:var(--orange)}
+.final-cta p{font-size:15px;color:var(--gray);margin-bottom:32px}
+
+/* SECTION HEADERS */
+.section-eyebrow{font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:12px}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.15;margin-bottom:40px;letter-spacing:-0.5px;color:var(--black)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 0;background:#fafafa}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:10px}
+.footer-links a{font-size:12px;color:var(--gray)}
+.footer-copy{font-size:11px;color:#bbb;text-align:center}
+
+/* POPUP */
+#lead-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
+#lead-overlay.open{display:flex}
+#lead-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:36px 28px;width:100%;max-width:420px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.12)}
+.lead-badge{display:inline-block;background:var(--orange-light);border:1px solid rgba(255,85,0,.2);color:var(--orange);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:18px}
+#lead-box h2{font-family:'Syne',sans-serif;font-size:clamp(1rem,4vw,1.25rem);font-weight:800;color:var(--black);margin:0 0 8px;line-height:1.2}
+#lead-box .lead-desc{font-size:13px;color:var(--gray);margin:0 0 20px;line-height:1.6}
+.lead-bonus-box{background:var(--gray-light);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start}
+.lead-bonus-icon{font-size:22px;flex-shrink:0}
+.lead-bonus-title{font-size:13px;font-weight:700;color:var(--black);margin-bottom:3px}
+.lead-bonus-sub{font-size:12px;color:var(--orange);font-weight:600}
+.lead-input{width:100%;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:13px 16px;color:var(--black);font-size:14px;outline:none;margin-bottom:10px;font-family:inherit;transition:border-color .2s}
+.lead-input:focus{border-color:var(--orange)}
+.lead-input::placeholder{color:#bbb}
+#lead-submit{width:100%;background:var(--orange);color:#fff;font-size:16px;font-weight:700;padding:16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;margin-top:4px;transition:opacity .15s}
+#lead-submit:hover{opacity:.88}
+#lead-submit:disabled{opacity:.6;cursor:not-allowed}
+#lead-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#bbb;font-size:20px;cursor:pointer;line-height:1}
+#lead-close:hover{color:var(--black)}
+.lead-skip{display:block;text-align:center;font-size:13px;color:var(--gray);margin-top:14px;cursor:pointer;text-decoration:underline}
+.lead-footer-text{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:#bbb;text-align:center}
+
+#loading-overlay{display:none;position:fixed;inset:0;z-index:999998;background:#fff;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+#loading-overlay.show{display:flex}
+.loading-spinner{width:36px;height:36px;border:3px solid #f0f0f0;border-top:3px solid var(--orange);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:var(--gray)}
+
+/* RESPONSIVO */
+@media(max-width:600px){
+  section{padding:52px 0}
+  .hero{padding:48px 0 40px}
+  .price-card{padding:28px 20px}
+  .inst-card{padding:28px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- BARRA TOPO -->
+<div class="topbar">🔥 Oferta especial — <strong>R$47</strong> para os primeiros 10 <span>· Vagas limitadas</span></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="w">
+    <div class="hero-eyebrow"><span></span>Para donos de delivery e gestores de tráfego</div>
+    <h1>Tenha acesso ao mesmo método utilizado em <em>mais de 30 operações</em> de delivery</h1>
+    <p class="hero-sub">O Método PD10X é o sistema completo de tráfego pago para o nicho de alimentação — do zero à escala. Campanhas, funis, públicos e análises que geram pedidos todos os dias.</p>
+    <div class="hero-ctas">
+      <a href="javascript:void(0)" onclick="openLead()" class="btn-primary">🔒 Quero o método agora</a>
+      <a href="#vsl" class="btn-ghost">▶ Assistir apresentação</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item"><span class="proof-num">500+</span><span class="proof-label">Alunos</span></div>
+      <div class="proof-item"><span class="proof-num">4.9</span><span class="proof-label">Avaliação</span></div>
+      <div class="proof-item"><span class="proof-num">10X</span><span class="proof-label">Escala</span></div>
+      <div class="proof-item"><span class="proof-num">7 dias</span><span class="proof-label">Garantia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VSL -->
+<section class="vsl-section" id="vsl">
+  <div class="w">
+    <p class="vsl-label">Assista a apresentação completa antes de decidir</p>
+    <div class="vsl-wrap" id="ytFacade" onclick="loadYT()" role="button" tabindex="0" aria-label="Assistir apresentação">
+      <img src="https://img.youtube.com/vi/GbOcQ1VWMww/hqdefault.jpg" alt="Apresentação Método PD10X" width="480" height="270" loading="eager" decoding="async">
+      <div class="vsl-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+    <div class="vsl-cta"><a href="javascript:void(0)" onclick="openLead()" class="btn-primary">🔒 Quero o método agora</a></div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section>
+  <div class="w">
+    <p class="section-eyebrow">A realidade</p>
+    <h2 class="section-title">Você se identifica?</h2>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="pain-icon">💸</div><div class="pain-title">Gasta em anúncio sem retorno</div><div class="pain-desc">Todo mês dinheiro no Meta Ads sem saber onde está o erro — e sem pedido novo.</div></div>
+      <div class="pain-card"><div class="pain-icon">🌀</div><div class="pain-title">Gerenciador é um labirinto</div><div class="pain-desc">Não sabe qual campanha criar, qual público, o que as métricas significam.</div></div>
+      <div class="pain-card"><div class="pain-icon">📉</div><div class="pain-title">Concorrente cresce, você estagna</div><div class="pain-desc">O delivery da esquina está bombando e você não tem estratégia de captação.</div></div>
+      <div class="pain-card"><div class="pain-icon">🏷️</div><div class="pain-title">Só vende com desconto</div><div class="pain-desc">Margem sumindo, trabalho aumentando. Sem promoção, não entra pedido.</div></div>
+      <div class="pain-card"><div class="pain-icon">📱</div><div class="pain-title">Sem sistema de atendimento</div><div class="pain-desc">Atende um por um no WhatsApp, sem automação, sem escala, sem tempo.</div></div>
+      <div class="pain-card"><div class="pain-icon">❌</div><div class="pain-title">Gestor sem especialização</div><div class="pain-desc">Campanhas genéricas que não convertem. Delivery tem regras próprias.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALIFICAÇÃO -->
+<section class="qual-section">
+  <div class="w">
+    <p class="section-eyebrow">Qualificação</p>
+    <h2 class="section-title">Para quem é o PD10X?</h2>
+    <div class="qual-grid">
+      <div class="qual-box yes">
+        <div class="qual-head">✅ Este curso É para você</div>
+        <div class="qual-item"><span>→</span><span>Dono de delivery que quer parar de depender só do iFood</span></div>
+        <div class="qual-item"><span>→</span><span>Gestor de tráfego que quer se especializar em alimentação</span></div>
+        <div class="qual-item"><span>→</span><span>Já tentou anunciar no Meta mas sem resultado consistente</span></div>
+        <div class="qual-item"><span>→</span><span>Quer sistema de captação automático e escalável</span></div>
+        <div class="qual-item"><span>→</span><span>Busca método testado com análises reais, não teoria</span></div>
+      </div>
+      <div class="qual-box no">
+        <div class="qual-head">❌ Este curso NÃO é para você</div>
+        <div class="qual-item"><span>×</span><span>Busca atalho sem implementar nada</span></div>
+        <div class="qual-item"><span>×</span><span>Não tem delivery nem cliente de delivery</span></div>
+        <div class="qual-item"><span>×</span><span>Não está disposto a dedicar tempo ao método</span></div>
+        <div class="qual-item"><span>×</span><span>Quer só assistir sem colocar em prática</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="conteudo">
+  <div class="w">
+    <p class="section-eyebrow">Conteúdo</p>
+    <h2 class="section-title">10 módulos do zero à escala</h2>
+    <div class="mod-meta">
+      <span class="mod-meta-item"><strong>10</strong> módulos</span>
+      <span class="mod-meta-item"><strong>40+</strong> aulas</span>
+      <span class="mod-meta-item">Acesso <strong>vitalício</strong></span>
+      <span class="mod-meta-item">Atualizações <strong>inclusas</strong></span>
+    </div>
+    <div class="mod-list">
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 01</span><span class="mod-title">Como Funciona o Método PD10X</span><span class="mod-badge">4 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Método PD10X — testado e aprovado</li><li>Públicos Especiais em 3 Camadas</li><li>Anúncios Automáticos por Horário e Data</li><li>Atendimento Rápido com Mensagens Automáticas</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 02</span><span class="mod-title">Análise de Mercado</span><span class="mod-badge">6 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Estratégias para Análise de Mercado</li><li>Sushi e Comida Japonesa</li><li>Açaí e Sorveteria</li><li>Frango Frito, Batata e Picadão</li><li>Hambúrguer e Lanches</li><li>Marmita e Comida do Dia a Dia</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 03</span><span class="mod-title">Configuração do Funil de Vendas</span><span class="mod-badge">4 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Configuração do Funil de Vendas</li><li>Edição de Criativos</li><li>WhatsApp Configurado</li><li>Página do Facebook</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 04</span><span class="mod-title">Configuração da Conta</span><span class="mod-badge">3 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Configuração do Gerenciador de Anúncios</li><li>Configuração da API do WhatsApp</li><li>Configuração da API de Conversão</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 05</span><span class="mod-title">Tudo Sobre Públicos</span><span class="mod-badge">3 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Criando os Públicos em 3 Camadas</li><li>Tudo Sobre Públicos em 3 Camadas</li><li>Configuração de Públicos em 3 Camadas</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 06</span><span class="mod-title">Criando as Primeiras Campanhas</span><span class="mod-badge">4 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Campanhas de WhatsApp</li><li>Campanhas de Cardápio</li><li>Campanhas de Instagram</li><li>Campanhas de Facebook</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 07</span><span class="mod-title">Métricas e Desempenho</span><span class="mod-badge">2 aulas</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Leitura de Métricas Personalizadas</li><li>Painel Personalizado de Métricas</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 08</span><span class="mod-title">Escalando Campanhas na Prática</span><span class="mod-badge">25+ análises</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Painel de Métricas Personalizadas</li><li>Primeira Análise — 7 Dias</li><li>Aula Bônus com Cupom 15%</li><li>25 análises reais de escalada</li><li>Bônus Extra — Sucesso Comprovado</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 09</span><span class="mod-title">Atualização: Anúncios de Vendas</span><span class="mod-badge">Bônus</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Nova Atualização — Anúncios de Vendas</li></ul></div></div>
+      <div class="mod-item"><div class="mod-header" onclick="toggleMod(this)" role="button" tabindex="0" aria-expanded="false"><span class="mod-num">MOD 10</span><span class="mod-title">Postagens Automáticas</span><span class="mod-badge">Bônus</span><svg class="mod-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="mod-body"><ul><li>Meta Business Suite — Postagens Programadas</li></ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUTOR -->
+<section class="inst-section">
+  <div class="w">
+    <p class="section-eyebrow" style="text-align:center">Seu instrutor</p>
+    <h2 class="section-title" style="text-align:center">Quem vai te ensinar</h2>
+    <div class="inst-card">
+      <img src="https://pd10x-v2.vercel.app/jonas-hq.jpg" alt="Jonas" class="inst-photo" width="200" loading="lazy">
+      <div>
+        <div class="inst-name">Jonas</div>
+        <div class="inst-role">Especialista em Tráfego para Delivery</div>
+        <p class="inst-bio">Jonas desenvolveu o Método PD10X depois de anos gerenciando tráfego especificamente para o setor de alimentação. O que começou como sistema interno para seus clientes se tornou um método replicável aplicado com sucesso em dezenas de deliveries.</p>
+        <p class="inst-bio">Diferente de cursos genéricos, Jonas construiu o PD10X do campo — cada aula e análise foi testada com dinheiro real em campanhas reais de delivery.</p>
+        <div class="inst-stats">
+          <div><div class="inst-stat-num">500+</div><div class="inst-stat-label">Alunos</div></div>
+          <div><div class="inst-stat-num">25+</div><div class="inst-stat-label">Análises ao vivo</div></div>
+          <div><div class="inst-stat-num">30+</div><div class="inst-stat-label">Operações</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section>
+  <div class="w">
+    <p class="section-eyebrow">Resultados reais</p>
+    <h2 class="section-title">Quem já aplicou o método</h2>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-thumb" onclick="openTestVideo('ONpqm1STRVQ',this)" role="button" tabindex="0" aria-label="Ver depoimento de Eduardo">
+          <img src="https://img.youtube.com/vi/ONpqm1STRVQ/mqdefault.jpg" alt="Depoimento Eduardo" width="320" height="180" loading="lazy">
+          <div class="test-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="test-info"><div class="test-stars">★★★★★</div><div class="test-name">Eduardo</div><div class="test-role">Dono de hamburgueria</div></div>
+      </div>
+      <div class="test-card">
+        <div class="test-thumb" onclick="openTestVideo('qgmexlvRrBY',this)" role="button" tabindex="0" aria-label="Ver depoimento de Gerson">
+          <img src="https://img.youtube.com/vi/qgmexlvRrBY/mqdefault.jpg" alt="Depoimento Gerson" width="320" height="180" loading="lazy">
+          <div class="test-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="test-info"><div class="test-stars">★★★★★</div><div class="test-name">Gerson</div><div class="test-role">Gestor de tráfego</div></div>
+      </div>
+      <div class="test-card">
+        <div class="test-thumb" onclick="openTestVideo('XoJZucfaFKg',this)" role="button" tabindex="0" aria-label="Ver depoimento de Kauan">
+          <img src="https://img.youtube.com/vi/XoJZucfaFKg/mqdefault.jpg" alt="Depoimento Kauan" width="320" height="180" loading="lazy">
+          <div class="test-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="test-info"><div class="test-stars">★★★★★</div><div class="test-name">Kauan</div><div class="test-role">Dono de delivery</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BÔNUS -->
+<section class="bonus-section">
+  <div class="w">
+    <p class="section-eyebrow">Bônus exclusivos</p>
+    <h2 class="section-title">Incluso sem custo extra</h2>
+    <div class="bonus-grid">
+      <div class="bonus-card"><div class="bonus-tag">Bônus</div><div class="bonus-title">Consultoria ao Vivo de 30 Minutos</div><div class="bonus-desc">Os 10 primeiros compradores recebem uma sessão ao vivo de 30 minutos com Jonas analisando o seu delivery.</div><div class="bonus-price"><s>R$ 397</s><strong>Incluso</strong></div></div>
+      <div class="bonus-card"><div class="bonus-tag">Bônus</div><div class="bonus-title">Painel de Métricas Personalizadas</div><div class="bonus-desc">Template exclusivo para acompanhar campanhas com as métricas que importam para delivery.</div><div class="bonus-price"><s>R$ 97</s><strong>Incluso</strong></div></div>
+      <div class="bonus-card"><div class="bonus-tag">Bônus</div><div class="bonus-title">Estratégia de Cupom 15%</div><div class="bonus-desc">Como usar cupom para gerar urgência e aumentar pedidos sem destruir a margem.</div><div class="bonus-price"><s>R$ 67</s><strong>Incluso</strong></div></div>
+      <div class="bonus-card"><div class="bonus-tag">Bônus</div><div class="bonus-title">Postagens Automáticas</div><div class="bonus-desc">Programe postagens no Meta Business Suite e mantenha presença sem trabalho manual.</div><div class="bonus-price"><s>R$ 87</s><strong>Incluso</strong></div></div>
+      <div class="bonus-card"><div class="bonus-tag">Extra</div><div class="bonus-title">Sucesso Comprovado</div><div class="bonus-desc">Análise final com resultados reais de contas escaladas — prova concreta de que funciona.</div><div class="bonus-price"><s>R$ 127</s><strong>Incluso</strong></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREÇO -->
+<section class="price-section" id="preco">
+  <div class="w" style="text-align:center">
+    <p class="section-eyebrow">Oferta limitada</p>
+    <h2 class="section-title">Acesso completo ao PD10X</h2>
+    <div class="price-card">
+      <div class="price-badge">🔥 Apenas para os 10 primeiros</div>
+      <p class="price-from">De R$ 597</p>
+      <div class="price-tag">R$ 47</div>
+      <p class="price-install">ou 11x de R$ 5,22 no cartão</p>
+      <div class="vagas-wrap">
+        <div class="vagas-label"><span>⚠ Vagas restantes: 8</span><span>55% ocupado</span></div>
+        <div class="vagas-bar"><div class="vagas-fill"></div></div>
+      </div>
+      <ul class="price-list">
+        <li>10 módulos completos do zero à escala</li>
+        <li>Análise de mercado por nicho</li>
+        <li>Gerenciador, API WhatsApp e API Conversão</li>
+        <li>Sistema de Públicos em 3 Camadas</li>
+        <li>4 tipos de campanhas para delivery</li>
+        <li>25+ análises reais de escalada</li>
+        <li>Consultoria ao vivo 30 min (10 primeiros)</li>
+        <li>Painel de Métricas Personalizadas</li>
+        <li>Estratégia de Cupom 15%</li>
+        <li>Postagens Automáticas</li>
+        <li>Acesso vitalício + atualizações</li>
+      </ul>
+      <p class="price-total">Total em bônus: R$ 775 incluso</p>
+      <a href="javascript:void(0)" onclick="openLead()" class="btn-buy">🔒 Garantir minha vaga agora</a>
+      <p class="price-trust">✓ Compra segura &nbsp;💳 PIX · Cartão · Boleto &nbsp;✓ Kiwify</p>
+    </div>
+    <div class="guarantee">
+      <div class="guarantee-icon">🛡️</div>
+      <h3>7 Dias de Garantia Total</h3>
+      <p>Você tem <strong>7 dias completos</strong> para testar o método. Se por qualquer motivo não ficar satisfeito, devolvemos <strong>100% do valor</strong>. Sem perguntas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="w">
+    <p class="section-eyebrow" style="text-align:center">Dúvidas</p>
+    <h2 class="section-title" style="text-align:center">Perguntas frequentes</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false"><span>Preciso ter experiência com tráfego pago?</span><svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-a">Não. O PD10X funciona para iniciantes e gestores experientes. Se nunca mexeu em anúncio, o passo a passo te guia. Se já é gestor, vai se especializar no nicho de alimentação.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false"><span>Funciona para qualquer tipo de delivery?</span><svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-a">Sim. O Módulo 02 tem análises específicas para açaí, sushi, frango, hambúrguer, sorveteria, marmita e mais. Adaptável para qualquer negócio de alimentação.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false"><span>Preciso de muito dinheiro para anunciar?</span><svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-a">Não. O método foi pensado para funcionar com orçamentos controlados. Você otimiza antes de escalar — só aumenta o investimento quando os resultados aparecerem.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false"><span>Por quanto tempo tenho acesso?</span><svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-a">Acesso vitalício. Assiste no seu ritmo, quantas vezes quiser, e recebe todas as atualizações sem custo adicional.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false"><span>Sou gestor de tráfego, vale a pena?</span><svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-a">Com certeza. Delivery é um dos nichos com maior volume e recorrência. Gestores especializados cobram mais e retêm clientes por muito mais tempo.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false"><span>E se eu não gostar?</span><svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-a">7 dias de garantia total. Qualquer motivo, basta entrar em contato e devolvemos 100% do valor. Sem questionamentos.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta">
+  <div class="w">
+    <h2>Seu delivery pode faturar <em>10X mais</em></h2>
+    <p>A diferença entre um delivery estagnado e um que escala não é o produto — é o sistema de captação.</p>
+    <a href="javascript:void(0)" onclick="openLead()" class="btn-primary" style="display:inline-flex;font-size:18px;padding:20px 36px">🔒 Sim, quero multiplicar meu faturamento</a>
+    <p style="font-size:13px;color:#bbb;margin-top:16px">▸ Garantia de 7 dias · De R$597 por R$47 · Acesso imediato</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <div class="footer-links">
+      <a href="#">Privacidade</a>
+      <a href="#">Termos</a>
+      <a href="https://wa.me/5551989991033">Contato</a>
+    </div>
+    <p class="footer-copy">© 2024 Método PD10X · Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<!-- POPUP LEAD -->
+<div id="loading-overlay"><div class="loading-spinner"></div><p class="loading-text">Redirecionando...</p></div>
+<div id="lead-overlay">
+  <div id="lead-box">
+    <button id="lead-close" onclick="closeLead()" aria-label="Fechar">✕</button>
+    <div class="lead-badge">🎁 Bônus exclusivo</div>
+    <h2>Ganhe uma consultoria ao vivo de 30 minutos comigo</h2>
+    <p class="lead-desc">Preencha seus dados e garanta uma sessão ao vivo de 30 minutos onde analisamos juntos o seu delivery — sem custo extra.</p>
+    <div class="lead-bonus-box">
+      <span class="lead-bonus-icon">⏱️</span>
+      <div>
+        <div class="lead-bonus-title">Consultoria ao vivo — R$ 397</div>
+        <div class="lead-bonus-sub">Inclusa gratuitamente ao preencher abaixo</div>
+      </div>
+    </div>
+    <input class="lead-input" type="text" id="lead-nome" placeholder="Seu nome" maxlength="80" autocomplete="name">
+    <input class="lead-input" type="tel" id="lead-whats" placeholder="WhatsApp com DDD ex: 51999999999" maxlength="11" inputmode="numeric" autocomplete="tel">
+    <input class="lead-input" type="email" id="lead-email" placeholder="Seu melhor e-mail" maxlength="150" autocomplete="email">
+    <button id="lead-submit" onclick="submitLead()">🔒 Quero a consultoria e garantir minha vaga</button>
+    <span class="lead-skip" onclick="skipLead()">Continuar sem a consultoria →</span>
+    <div class="lead-footer-text">🔒 Seus dados são confidenciais e não serão compartilhados</div>
+  </div>
+</div>
+
+<script>
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbwI_2NWeOXoGAu0twxZh0C4iltyQ6VqJTjcVdjunrwqkqsYhz_nSeK3o8NgP5yyJ4mE/exec';
+var CHECKOUT_URL='https://pay.kiwify.com.br/o20BvTf';
+
+document.addEventListener('DOMContentLoaded',function(){
+  var w=document.getElementById('lead-whats');
+  if(w)w.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').slice(0,11);});
+  document.querySelectorAll('a[href*="kiwify"]').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();openLead();});
+  });
+});
+
+function loadYT(){
+  var f=document.getElementById('ytFacade');
+  f.innerHTML='<iframe class="vsl-iframe" src="https://www.youtube.com/embed/GbOcQ1VWMww?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
+}
+
+function openTestVideo(id,el){
+  el.innerHTML='<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
+}
+
+function toggleMod(h){
+  var i=h.parentElement;
+  i.classList.toggle('open');
+  h.setAttribute('aria-expanded',i.classList.contains('open'));
+}
+
+function toggleFaq(h){
+  var i=h.parentElement;
+  i.classList.toggle('open');
+  h.setAttribute('aria-expanded',i.classList.contains('open'));
+}
+
+function openLead(){
+  if(localStorage.getItem('lead_pd10x')){
+    document.getElementById('loading-overlay').classList.add('show');
+    setTimeout(function(){window.location.href=CHECKOUT_URL;},300);
+    return;
+  }
+  document.getElementById('lead-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){document.getElementById('lead-nome').focus();},150);
+}
+
+function closeLead(){
+  document.getElementById('lead-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function skipLead(){
+  closeLead();
+  document.getElementById('loading-overlay').classList.add('show');
+  setTimeout(function(){window.location.href=CHECKOUT_URL;},300);
+}
+
+function showLeadMsg(t){
+  var m=document.getElementById('lead-msg');
+  if(m){m.textContent=t;m.style.display='block';setTimeout(function(){m.style.display='none';},3000);}
+  else alert(t);
+}
+
+function submitLead(){
+  var nome=document.getElementById('lead-nome').value.trim();
+  var whats=document.getElementById('lead-whats').value.trim();
+  var email=document.getElementById('lead-email').value.trim();
+  if(!nome){showLeadMsg('⚠️ Preencha seu nome');return;}
+  if(!whats||whats.length<10){showLeadMsg('⚠️ WhatsApp inválido');return;}
+  if(!email||!email.includes('@')){showLeadMsg('⚠️ E-mail inválido');return;}
+  var btn=document.getElementById('lead-submit');
+  btn.disabled=true;btn.textContent='Salvando...';
+  var url=SCRIPT_URL+'?nome='+encodeURIComponent(nome)+'&whatsapp='+encodeURIComponent(whats)+'&email='+encodeURIComponent(email)+'&t='+Date.now();
+  var img=new Image();img.src=url;
+  localStorage.setItem('lead_pd10x','1');
+  closeLead();
+  document.getElementById('loading-overlay').classList.add('show');
+  setTimeout(function(){window.location.href=CHECKOUT_URL;},300);
+}
+</script>
+
+</body>
+</html>
